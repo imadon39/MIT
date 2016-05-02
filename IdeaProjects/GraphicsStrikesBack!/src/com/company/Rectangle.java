@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class Rectangle implements Sprite {
+public class Rectangle implements Mover {
     private int width;
     private int height;
     private Color color;
