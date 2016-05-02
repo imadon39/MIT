@@ -10,7 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JApplet;
 
-public class Oval implements Sprite {
+public class Oval implements Mover {
     private int width;
     private int height;
     private Color color;
