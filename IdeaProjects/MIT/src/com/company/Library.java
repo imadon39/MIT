@@ -8,15 +8,15 @@ import java.util.*;
  */
 public class Library {
     String name;
-    HashSet<Book> books;
+    HashMap<String, Book> books;
 
     public Library(String libraryName) {
         name = libraryName;
-        books = new HashSet<Book>();
+        books = new HashMap<String, Book>();
     }
 
     public void addBook(Book book){
-        books.add(book);
+        books.put(book.title,book);
     }
 
     public static void printOpeningHours(){
@@ -28,23 +28,24 @@ public class Library {
     }
 
     public void borrowBook(String bookName){
-        for(Book book : books){
-            if(book.title.equals(bookName)){
-                if(book.isBorrowed()) {
-                    System.out.println("Sorry, this book is already borrowed.");
-                }else{
-                    System.out.println("You successfully borrowed The Lord of the Rings");
-                    book.borrowed();
-                }
-                return;
+        if(books.containsKey(bookName)){
+            Book book = books.get(bookName);
+            if(book.isBorrowed()) {
+                System.out.println("Sorry, this book is already borrowed.");
+            }else{
+                System.out.println("You successfully borrowed The Lord of the Rings");
+                book.borrowed();
             }
+        }else{
+            System.out.println("Sorry, this book is not in our catalog.");
         }
-        System.out.println("Sorry, this book is not in our catalog.");
     }
 
     public void printAvailableBooks(){
         boolean containAvailableBook = false;
-        for(Book book : books){
+        Book book;
+        for (Map.Entry<String, Book> entry : books.entrySet()) {
+            book = entry.getValue();
             if(!book.isBorrowed()) {
                 System.out.println(book.title);
                 containAvailableBook = true;
@@ -55,19 +56,18 @@ public class Library {
         }
     }
 
-    public void returnBook(String bookName){
-        for(Book book : books){
-            if(book.title.equals(bookName)){
-                if(book.isBorrowed()) {
-                    System.out.println("You successfully returned " + bookName);
-                    book.returned();
-                }else{
-                    System.out.println("You did not borrow " + bookName);
-                }
-                return;
+    public void returnBook(String bookName) {
+        if (books.containsKey(bookName)) {
+            Book book = books.get(bookName);
+            if (book.isBorrowed()) {
+                System.out.println("You successfully returned " + bookName);
+                book.returned();
+            } else {
+                System.out.println("You did not borrow " + bookName);
             }
+        } else {
+            System.out.println("You did not borrow " + bookName + "in this library");
         }
-        System.out.println("You did not borrow " + bookName + "in this library");
     }
 
 
