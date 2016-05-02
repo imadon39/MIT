@@ -1,7 +1,7 @@
 package com.company;
 
 /**
- * Created by miku on 2016/04/30.
+ * Created by miku on 2016/05/02
  */
 public class GravityCalculator {
     public static void main(String[] arguments) {
